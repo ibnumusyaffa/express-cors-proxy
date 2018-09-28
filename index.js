@@ -8,7 +8,7 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept,X-Authorization'
+    'Origin, X-Requested-With, Content-Type, Accept, X-Authorization'
   );
   next();
 });
@@ -18,13 +18,15 @@ app.all('*', function(req, res) {
   req
     .pipe(request(url))
     .on('error', function(err) {
-      res.send({
+      console.log("asasasa",err);
+      res.status(401).json({
         error: true,
-        message: 'Terjadi error pada server'
+        message: 'Terjadi error pada serverr'
       });
     })
     .pipe(res);
 });
 
 console.log(`Starting at port ${port}...`);
+
 app.listen(port);
